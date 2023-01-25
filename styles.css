@@ -38,6 +38,7 @@ body {
     background-color: black;
     color: white;
     font-family: pixel;
+    font-size: 22px;
 }
 
 
@@ -106,4 +107,9 @@ body {
 p {
     font-family: pixel;
     font-size: 25px;
+}
+
+#heart{
+    height:35%;
+    width: 8%;
 }
