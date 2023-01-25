@@ -1,4 +1,6 @@
 html {
+    display: flex;
+    justify-content: center;
     background-color: black;
 }
 
@@ -43,7 +45,7 @@ body {
 
 #output_buttons{
     display: grid;
-    grid-template-columns:150px 110px;
+    grid-template-columns:150px 150px;
     grid-template-rows: 60px;
     justify-content: space-between;
     margin-bottom: 20px;
