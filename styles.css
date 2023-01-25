@@ -1,3 +1,7 @@
+html {
+    background-color: black;
+}
+
 body {
     display: flex;
 }
@@ -7,9 +11,9 @@ body {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    background-image: url(images/images.png);
+    background-image: url(images/undertale_background.png);
     background-repeat: repeat;
-    border: 1px solid rgb(63, 63, 63);
+    border: 2px solid green;
     
 
     width: 50vh;
@@ -29,8 +33,12 @@ body {
     width: 75%;
     padding: 10px;
     
-    background-color: rgba(255, 255, 255, .7);
-    border: 2px solid rgb(63, 63, 63);
+    border: 5px solid white;
+    background-color: black;
+    color: white;
+}
+#output_container p{
+    font-size: 20px;
 }
 
 #output_buttons{
@@ -46,9 +54,13 @@ body {
     justify-content: center;
     align-items: center;
 
-    box-shadow: 5px 5px grey;
-    border: 3px solid grey;
-    background: linear-gradient(to bottom, white 35%, rgb(202, 200, 200) 100%);
+    border: 5px solid rgb(255, 102, 0);
+    background-color: black;
+    color: rgb(255, 102, 0);
+}
+#output p {
+    font-family: mercy;
+    font-size: 35px;
 }
 
 
@@ -65,9 +77,10 @@ body {
     align-items: center;
     justify-content: center;
 
-    box-shadow: 3px 3px grey;
-    border: 2px solid grey;
-    background: linear-gradient(to bottom, white 35%, rgb(202, 200, 200) 100%);
+    border: 3px solid rgb(255, 136, 0);
+    background-color: black;
+    color: white;
+    
 }
 
 .ops{
@@ -75,14 +88,22 @@ body {
     align-items: center;
     justify-content: center;
 
-    box-shadow: 3px 3px grey;
-    border: 2px solid grey;
-    background: linear-gradient(to bottom, white 35%, rgb(202, 200, 200) 100%);
+    border: 3px solid rgb(255, 136, 0);
+    background-color: black;
+    color: red;
+}
+
+
+@font-face {
+    font-family: pixel;
+    src: url(font/PixelOperatorMono8-Bold.ttf);
+}
+@font-face {
+    font-family: mercy;
+    src: url(font/mercy.ttf);
 }
 
 p {
-    
-    font-family: 'Open Sans', sans-serif;
-    font-size: 45px;
-    font-weight: lighter;
+    font-family: pixel;
+    font-size: 25px;
 }
