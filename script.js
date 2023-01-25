@@ -60,4 +60,25 @@ const operate = function(a, b, operator){
     }
 }
 
+////////////////////BUTTONS//////////////////////////////////////////////
+const output = document.querySelector("#output_container");
+const number_buttons = Array.from(document.querySelectorAll(".num"));
+const operator_buttons = Array.from(document.querySelectorAll(".ops"));
+
+
+/////////////////EVENT LISTENERS + EVENT LISTENER FUNCTIONS////////////////
+number_buttons.forEach(button => button.addEventListener('click', (event) => {
+    outputFunc(button, event);
+}));
+operator_buttons.forEach(button => button.addEventListener('click', (event) => {
+    outputFunc(button, event);
+}));
+
+//function to put button pressed text into output container
+const outputFunc = function(button, e){
+    let num = button.textContent;
+    output.textContent += num;
+    console.log(e.currentTarget);
+}
+
 console.log(operate(10,12,'*'));
