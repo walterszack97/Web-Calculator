@@ -72,8 +72,10 @@ console.log(typeof myEquation.operator[1])
 const output = document.querySelector("#output_container");
 const number_buttons = Array.from(document.querySelectorAll(".num"));
 const operator_buttons = Array.from(document.querySelectorAll(".ops"));
+const clear = document.querySelector(".clear")
 const equals = document.querySelector(".equals");
 const emoji = String.fromCodePoint("0x2764")
+
 
 
 /////////////////EVENT LISTENERS + EVENT LISTENER FUNCTIONS////////////////
@@ -163,6 +165,16 @@ equals.addEventListener(("click"), event => {
         myEquation.operator[2] = undefined;
     }
 })
+
+//clear button function
+clear.addEventListener(("click"), event => {
+    output.textContent = "";
+    numberOnePlaceholder = [];
+    numberTwoPlaceholder = [];
+    myEquation.operator = [];
+    myEquation.firstNum = null;
+    myEquation.secondNum = null;
+});
 
 
 
