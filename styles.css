@@ -73,6 +73,11 @@ body {
     column-gap: 20px;
 }
 
+#input_buttons div:nth-child(15){
+    grid-column: 4;
+}
+
+
 .num{
     display: flex;
     align-items: center;
@@ -113,3 +118,4 @@ p {
     height:35%;
     width: 8%;
 }
+
