@@ -14,6 +14,7 @@ body {
     align-items: center;
     background-image: url(images/undertale_background.png);
     background-repeat: repeat;
+    background-position: 12% ;
     border: 2px solid green;
     
 
