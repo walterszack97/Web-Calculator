@@ -17,8 +17,6 @@ const divide = function(a, b) {
 };
 
 
-
-
 ////////////////////array functions/////////////////////////
 const sum = function(numbers) {
     return numbers.reduce((total, number) => total + number, 0)
@@ -46,6 +44,14 @@ const power = function(a, b) {
 };
 
 //////////////////////MECHANICAL FUNCTIONS/////////////////
+let myEquation = {
+    firstNum: null,
+    secondNum: null,
+    operator: [],
+};
+let numberOnePlaceholder = [];
+let numberTwoPlaceholder = [];
+
 const operate = function(a, b, operator){
     switch(operator) {
         case '+':
@@ -60,6 +66,8 @@ const operate = function(a, b, operator){
     }
 }
 
+console.log(typeof myEquation.operator[1])
+
 ////////////////////BUTTONS//////////////////////////////////////////////
 const output = document.querySelector("#output_container");
 const number_buttons = Array.from(document.querySelectorAll(".num"));
@@ -69,16 +77,84 @@ const operator_buttons = Array.from(document.querySelectorAll(".ops"));
 /////////////////EVENT LISTENERS + EVENT LISTENER FUNCTIONS////////////////
 number_buttons.forEach(button => button.addEventListener('click', (event) => {
     outputFunc(button, event);
+    //get first and second numbers
+    if (myEquation.operator[0] === undefined){
+    numberOnePlaceholder.push(event.target.textContent);
+    myEquation.firstNum = Number(numberOnePlaceholder.join(''));
+    }
+
+
+    if (myEquation.operator[0] !== undefined){
+        numberTwoPlaceholder.push(event.target.textContent);
+        myEquation.secondNum = Number(numberTwoPlaceholder.join(''));
+        myEquation.operator[1] = 'x'
+    }
 }));
+
 operator_buttons.forEach(button => button.addEventListener('click', (event) => {
-    outputFunc(button, event);
+    outputOppFunc(button, event);
+   
+    //get operator
+    console.log(event.target.textContent)
+    if (myEquation.operator[0] === undefined){
+        myEquation.operator[0] = event.target.textContent;
+    } else if (typeof myEquation.operator[0] === 'string' && myEquation.secondNum == null){
+        myEquation.operator[0] = event.target.textContent;
+    } 
+
+    if (myEquation.operator[1] == 'x'){
+        myEquation.operator[1] = event.target.textContent
+    }
+
+   
+    //calculate if second operator is pressed
+    if (myEquation.operator[1] !== undefined && myEquation.secondNum !== null) {
+        myEquation.firstNum = operate(myEquation.firstNum, myEquation.secondNum, myEquation.operator[0]);
+        
+        numberOnePlaceholder = [];
+        numberTwoPlaceholder = [];
+        myEquation.secondNum = null;
+        output.textContent = `${myEquation.firstNum}${myEquation.operator[1]}`;
+        myEquation.operator[0] = myEquation.operator[1];
+        myEquation.operator[1] = undefined;
+        myEquation.operator[2] = undefined;
+
+    }
+
 }));
+
+
 
 //function to put button pressed text into output container
 const outputFunc = function(button, e){
     let num = button.textContent;
     output.textContent += num;
-    console.log(e.currentTarget);
 }
 
-console.log(operate(10,12,'*'));
+
+const outputOppFunc = function(button, e){
+    if (myEquation.operator[0] === undefined ){
+        output.textContent += e.target.textContent;
+    }
+    
+    if (myEquation.operator[0] !== undefined ){
+        output.textContent = output.textContent.replace(`${myEquation.operator[0]}`, e.target.textContent)
+    }
+}
+
+
+function isOperator(lastChar){
+    switch (lastChar){
+        case '/':
+            return true;
+        case '*':
+            return true;
+        case '-':
+            return true;
+        case '-':
+            return true;
+        case '+':
+            return true;
+}
+    return false;
+}
