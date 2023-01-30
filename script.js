@@ -72,22 +72,31 @@ console.log(typeof myEquation.operator[1])
 const output = document.querySelector("#output_container");
 const number_buttons = Array.from(document.querySelectorAll(".num"));
 const operator_buttons = Array.from(document.querySelectorAll(".ops"));
+const equals = document.querySelector(".equals");
+const emoji = String.fromCodePoint("0x2764")
 
 
 /////////////////EVENT LISTENERS + EVENT LISTENER FUNCTIONS////////////////
 number_buttons.forEach(button => button.addEventListener('click', (event) => {
     outputFunc(button, event);
     //get first and second numbers
-    if (myEquation.operator[0] === undefined){
-    numberOnePlaceholder.push(event.target.textContent);
-    myEquation.firstNum = Number(numberOnePlaceholder.join(''));
+
+    if (output.textContent.charAt(output.textContent.length-2) == emoji){
+        output.textContent = event.target.textContent;
+        myEquation.operator = [];
+        numberOnePlaceholder.push(event.target.textContent);
+        myEquation.firstNum = Number(numberOnePlaceholder.join(''));
+    
+    } else if (myEquation.operator[0] === undefined) {
+        numberOnePlaceholder.push(event.target.textContent);
+        myEquation.firstNum = Number(numberOnePlaceholder.join(''));
     }
 
 
     if (myEquation.operator[0] !== undefined){
         numberTwoPlaceholder.push(event.target.textContent);
         myEquation.secondNum = Number(numberTwoPlaceholder.join(''));
-        myEquation.operator[1] = 'x'
+        myEquation.operator[1] = emoji
     }
 }));
 
@@ -102,7 +111,7 @@ operator_buttons.forEach(button => button.addEventListener('click', (event) => {
         myEquation.operator[0] = event.target.textContent;
     } 
 
-    if (myEquation.operator[1] == 'x'){
+    if (myEquation.operator[1] == emoji){
         myEquation.operator[1] = event.target.textContent
     }
 
@@ -118,7 +127,6 @@ operator_buttons.forEach(button => button.addEventListener('click', (event) => {
         myEquation.operator[0] = myEquation.operator[1];
         myEquation.operator[1] = undefined;
         myEquation.operator[2] = undefined;
-
     }
 
 }));
@@ -142,19 +150,28 @@ const outputOppFunc = function(button, e){
     }
 }
 
+//equals button function
+equals.addEventListener(("click"), event => {
+    if (equationIsComplete()){
+        myEquation.firstNum = operate(myEquation.firstNum, myEquation.secondNum, myEquation.operator[0]);
+        numberOnePlaceholder = [];
+        numberTwoPlaceholder = [];
+        myEquation.secondNum = null;
+        output.textContent = `${myEquation.firstNum}${myEquation.operator[1]}`;
+        myEquation.operator[0] = myEquation.operator[1];
+        myEquation.operator[1] = undefined;
+        myEquation.operator[2] = undefined;
+    }
+})
 
-function isOperator(lastChar){
-    switch (lastChar){
-        case '/':
+
+
+//check if myEquation object is full of data
+function equationIsComplete(){
+    if (myEquation.firstNum !== null && myEquation.secondNum !== null){
+        if (myEquation.operator[0] !== undefined){
             return true;
-        case '*':
-            return true;
-        case '-':
-            return true;
-        case '-':
-            return true;
-        case '+':
-            return true;
-}
+        }
+    }
     return false;
 }
